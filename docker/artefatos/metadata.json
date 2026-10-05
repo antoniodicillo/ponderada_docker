@@ -1,0 +1,56 @@
+{
+  "model": "Ridge(alpha=10000)",
+  "features": [
+    "ret_1",
+    "ret_3",
+    "ret_7",
+    "ret_14",
+    "vol_7",
+    "vol_30",
+    "ma30_dist"
+  ],
+  "target": "Close(t+1) = Close(t) * exp(retorno log)",
+  "metrics": {
+    "naive_mae": 6.107517730496454,
+    "naive_cv_mae_return": 0.04188763789583302,
+    "models": {
+      "Ridge(alpha=10)": {
+        "cv_mae_return": 0.046530366776874846,
+        "test_mae": 6.128290115525402,
+        "test_rmse": 10.197322052447342,
+        "mean_abs_pred_return": 0.0037805959904510045,
+        "direction_acc": 0.5106382978723404
+      },
+      "Ridge(alpha=100)": {
+        "cv_mae_return": 0.04535273649893934,
+        "test_mae": 6.108603270538676,
+        "test_rmse": 10.176747328017445,
+        "mean_abs_pred_return": 0.00294724955154459,
+        "direction_acc": 0.49645390070921985
+      },
+      "Ridge(alpha=1000)": {
+        "cv_mae_return": 0.04324598348225304,
+        "test_mae": 6.122237529013296,
+        "test_rmse": 10.165516099114997,
+        "mean_abs_pred_return": 0.0017975447469597266,
+        "direction_acc": 0.48936170212765956
+      },
+      "Ridge(alpha=10000)": {
+        "cv_mae_return": 0.04271930182317231,
+        "test_mae": 6.148443907700942,
+        "test_rmse": 10.186080588815736,
+        "mean_abs_pred_return": 0.0023580589045680217,
+        "direction_acc": 0.4858156028368794
+      },
+      "GradientBoosting(raso)": {
+        "cv_mae_return": 0.04303620458874965,
+        "test_mae": 6.085049485965608,
+        "test_rmse": 10.090485226717766,
+        "mean_abs_pred_return": 0.0025547401391140014,
+        "direction_acc": 0.48936170212765956
+      }
+    },
+    "n_train": 1125,
+    "n_test": 282
+  }
+}

@@ -1,0 +1,19 @@
+services:
+  treino:
+    build: ./docker/train
+    volumes:
+      - artefatos:/artefatos
+
+  inferencia:
+    build: ./docker/inferencia
+    ports:
+      - "8000:8000"
+    volumes:
+      - artefatos:/artefatos
+    depends_on:
+      treino:
+        condition: service_completed_successfully
+
+volumes:
+  artefatos:
+    name: eth_artefatos
