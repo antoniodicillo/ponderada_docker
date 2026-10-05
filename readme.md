@@ -23,10 +23,22 @@ Pedi ao Sonnet 5.5 para desenhar o diagrama da arquitetura:
 
 ```mermaid
 flowchart LR
-    K[("Kaggle<br/>dataset")] --> T["Treino<br/>(container)"]
-    T -- "model.joblib<br/>(volume)" --> B["Inferência<br/>FastAPI<br/>/health /predict"]
-    C["Cliente"] -- "GET /predict?date=AAAA-MM-DD" --> B
-    B -- "preço previsto" --> C
+    K[("Kaggle<br/>dataset")]
+
+    subgraph Docker
+        T["Container de treino<br/>train.py"]
+        V[("Volume eth_artefatos<br/>model.joblib")]
+        B["Container de inferência<br/>FastAPI :8000<br/>/health  /predict"]
+        T -- "grava" --> V
+        V -- "carrega na subida" --> B
+    end
+
+    C["Cliente<br/>navegador (/docs) ou curl"]
+
+    K -- "download (kagglehub)" --> T
+    C -- "GET /predict?date=AAAA-MM-DD" --> B
+    B -- "JSON: preço previsto" --> C
+
 ```
 
 O modelo chega ao container de inferência por um volume Docker: o treino salva em `docker/artefatos/` (volume `eth_artefatos`) e o mesmo volume é montado na inferência. Rodando em python e fora do docker o treino salva em `docker/artefatos/`.
