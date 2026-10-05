@@ -71,8 +71,8 @@ Só o GradientBoosting (raso) superou o baseline, mas não por muito. Pesquisei 
 
 ### 7. Rotas
 
-`GET /health`: retorna 200 OK se o servidor estiver no ar e funcionando
-`GET /predict?date=AAAA-MM-DD`: procura dentro do joblib a data especificada e retorna o preço previsto para o dia seguinte. Só aceita datas de 2016-06-08 a 2020-04-15; fora disso retorna 404.
+- `GET /health`: retorna 200 OK se o servidor estiver no ar e funcionando
+- `GET /predict?date=AAAA-MM-DD`: procura dentro do joblib a data especificada e retorna o preço previsto para o dia seguinte. Só aceita datas de 2016-06-08 a 2020-04-15; fora disso retorna 404.
 
 Como o modelo final é treinado com todos os dados, a previsão de uma data do dataset já foi vista no treino. A avaliação real do modelo é a da seção 6.
 
@@ -103,7 +103,7 @@ curl "http://localhost:8000/predict?date=2030-01-01"
 
 Também dá para testar pelo navegador em http://localhost:8000/docs.
 
-O resultado foi igual no PowerShell (`Invoke-RestMethod`) e no WSL (`curl`). Na previsão de 2020-04-01, o modelo previu 136,26 e o preço real do dia seguinte foi 141,56. Isso é o esperado: como as previsões ficam perto de zero, o resultado é quase o preço do dia anterior.
+Na previsão de 2020-04-01, o modelo previu 136,26 e o preço real do dia seguinte foi 141,56. Isso é o esperado: como as previsões ficam perto de zero, o resultado é quase o preço do dia anterior e bem parecido com o naive.
 
 ### 10. Conclusão
 
